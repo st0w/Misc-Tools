@@ -30,8 +30,9 @@ To get 8 bits::
 To get 3 bits::
     x = bitstream.send(3)
 
-Note that the return value varies slightly.  If the requested number of
-bits is byte-width (that is, evenly divisible by 8), the returned data
+Note that the return value can optionally vary slightly.  If the
+requested number of bits is byte-width (that is, evenly divisible by
+8) and :param:`convert_bytes` is True (the default), the returned data
 will be converted to a string of bytes before being returned.
 Otherwise, the requested data is returned as a string of 0's and 1's.
 
@@ -65,7 +66,7 @@ from bitarray import bitarray
 # ---*< Initialization >*-----------------------------------------------------
 
 # ---*< Code >*---------------------------------------------------------------
-def bitstreamer(_bytes=""):
+def bitstreamer(_bytes="", convert_bytes=True):
     """Sets up a generator for streaming data as a series of bits"""
     __x = 0
     __a = bitarray(endian='big')
@@ -81,7 +82,7 @@ def bitstreamer(_bytes=""):
         """Now a string of 0's and 1's"""
         __ret = "".join([str(__n) for __n in __ret])
 
-        if len(__ret) % 8 == 0:
+        if convert_bytes and len(__ret) % 8 == 0:
             """It's byte width, convert it to a string of bits"""
             __ret = [__ret[__n:__n + 8] for __n in range(0, len(__ret),
                                                          8)]
