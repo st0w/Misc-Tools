@@ -71,8 +71,12 @@ def bitstreamer(_bytes="", convert_bytes=True):
     __x = 0
     __a = bitarray(endian='big')
     __a.fromstring(_bytes)
+    __bitsread = 0
 
     while True:
+        """Update total num bits read"""
+        __bitsread += __x
+
         """Get the requested bits, returns a list of bools"""
         __ret = [__a.pop(0) for __n in range(__x)]
 
@@ -89,6 +93,8 @@ def bitstreamer(_bytes="", convert_bytes=True):
             """And now to actual bytes"""
             __ret = "".join([chr(int(__n, 2)) for __n in __ret])
 
+        print "Read %s.%s bytes (%s bits)" % (__bitsread / 8, __bitsread % 8,
+                                              __bitsread)
         __x = (yield __ret)
 
 def bytestreamer(_bytes=""):
