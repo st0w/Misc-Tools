@@ -29,7 +29,6 @@ the file ".my.cnf: in the local user's (sqlback) home directory that is
 running this.  Make sure you set perms on .my.cnf to 400 or 600 so that
 nobody can read it.
 
-
 I then have a cron job setup as follows to run once daily::
     #!/bin/bash
     (HOME=/home/sqlback su -m sqlback -c /home/sqlback/mysqlbackup.py)
