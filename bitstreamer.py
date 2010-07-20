@@ -64,6 +64,7 @@ from bitarray import bitarray
 # ---*< Local imports >*------------------------------------------------------
 
 # ---*< Initialization >*-----------------------------------------------------
+DEBUG = False
 
 # ---*< Code >*---------------------------------------------------------------
 def bitstreamer(_bytes="", convert_bytes=True):
@@ -93,8 +94,10 @@ def bitstreamer(_bytes="", convert_bytes=True):
             """And now to actual bytes"""
             __ret = "".join([chr(int(__n, 2)) for __n in __ret])
 
-        print "Read %s.%s bytes (%s bits)" % (__bitsread / 8, __bitsread % 8,
-                                              __bitsread)
+        if DEBUG:
+            print "Read %s.%s bytes (%s bits)" % (__bitsread / 8,
+                                                  __bitsread % 8,
+                                                  __bitsread)
         __x = (yield __ret)
 
 def bytestreamer(_bytes=""):
