@@ -101,6 +101,7 @@ def do_backup(username=USER):
     os.chmod(fn, stat.S_IREAD | stat.S_IWRITE | stat.S_IRGRP)
     debug('Data written to %s\n' % fn)
 
+
 if __name__ == "__main__":
     if os.geteuid() == 0:
         sys.stderr.write("Don't run this as root.  There's no point and it's "
